@@ -116,6 +116,9 @@ function sms_mediaburst_send($number, $message, $options) {
   // Strip out any bad characters
   $number = preg_replace("/\D/","",$number);
 
+  // Remove leading international prefix zeros
+  $number = preg_replace("/^00/","",$number);
+
   // Prefix the number with the country code if provided and not already at the start of the number
   if (isset($options['country']) && preg_match("/^0/", $number)) {
     // Remove any prefix numbers
